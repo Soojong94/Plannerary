@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Creative Space</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
             color: #333;
             line-height: 1.6;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
         }
@@ -23,48 +24,128 @@
         .header {
             text-align: center;
             padding: 60px 0;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #3498db, #2ecc71, #f1c40f);
         }
 
         h1 {
             color: #2c3e50;
             margin: 0;
-            font-size: 2.5em;
+            font-size: 3.5em;
+            letter-spacing: 2px;
         }
 
-        p {
-            font-size: 1.1em;
-            color: #666;
-            max-width: 600px;
-            margin: 20px auto;
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
 
-        .accent {
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 2em;
+            margin-bottom: 15px;
             color: #3498db;
         }
 
-        @media (max-width: 600px) {
+        .accent {
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .circle-decoration {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(52,152,219,0.1) 0%, rgba(52,152,219,0) 70%);
+        }
+
+        .circle-1 { top: -100px; right: -100px; }
+        .circle-2 { bottom: -100px; left: -100px; }
+
+        @media (max-width: 768px) {
             .header {
-                padding: 40px 0;
+                padding: 40px 20px;
             }
             
             h1 {
-                font-size: 2em;
+                font-size: 2.5em;
             }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #666;
+            margin-top: 60px;
+        }
+
+        .footer-wave {
+            height: 50px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.3' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Welcome to <span class="accent">My Site</span></h1>
-            <p>nginx:alpine으로 호스팅되는 심플한 웹페이지입니다.</p>
+            <div class="circle-decoration circle-1"></div>
+            <div class="circle-decoration circle-2"></div>
+            <h1>Creative <span class="accent">Space</span></h1>
         </div>
-        <p>이 페이지는 가볍고 빠른 nginx:alpine 이미지를 사용하여 호스팅됩니다. 
-           심플하면서도 모던한 디자인으로 구성되어 있습니다.</p>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h2>Design</h2>
+            </div>
+            <div class="card">
+                <div class="card-icon">💡</div>
+                <h2>Innovation</h2>
+            </div>
+            <div class="card">
+                <div class="card-icon">✨</div>
+                <h2>Inspiration</h2>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-wave"></div>
+        </div>
     </div>
 </body>
 </html>
