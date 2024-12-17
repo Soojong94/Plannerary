@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/your-username/nginx-test.git'
+                    url: 'https://github.com/Soojong94/Plannerary.git'
             }
         }
         
