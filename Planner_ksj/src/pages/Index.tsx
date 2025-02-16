@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   useEffect(() => {
@@ -28,7 +29,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section
         id="home"
@@ -44,9 +45,11 @@ const Index = () => {
           <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto fade-up opacity-0">
             일상의 순간을 기록하고 AI가 분석하여 더 나은 계획을 제안해드립니다. 감정 분석을 통한 맞춤형 조언으로 당신의 하루를 더욱 풍요롭게 만들어보세요.
           </p>
-          <button className="bg-primary text-white px-8 py-3 rounded-full text-lg hover:bg-primary/90 transition-colors fade-up opacity-0">
-            무료로 시작하기
-          </button>
+          <Link to="/login">
+            <button className="bg-primary text-white px-8 py-3 rounded-full text-lg hover:bg-primary/90 transition-colors fade-up opacity-0">
+              무료로 시작하기
+            </button>
+          </Link>
           <img
             src="https://images.unsplash.com/photo-1517842645767-c639042777db"
             alt="Planning"
@@ -215,9 +218,11 @@ const Index = () => {
                     월 3회 계획 생성
                   </li>
                 </ul>
-                <button className="w-full bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors">
-                  시작하기
-                </button>
+                <Link to="/login">
+                  <button className="w-full bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors">
+                    시작하기
+                  </button>
+                </Link>
               </CardContent>
             </Card>
             <Card className="fade-up opacity-0 border-primary">
@@ -238,9 +243,12 @@ const Index = () => {
                     무제한 계획 생성
                   </li>
                 </ul>
-                <button className="w-full bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors">
-                  프로 시작하기
-                </button>
+                <Link to="/login">
+                  <button className="w-full bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors">
+                    프로 시작하기
+                  </button>
+                </Link>
+
               </CardContent>
             </Card>
           </div>

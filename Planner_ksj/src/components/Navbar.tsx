@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
@@ -56,9 +57,11 @@ const Navbar = () => {
               요금제
             </button>
           </div>
-          <button className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors">
-            무료로 시작하기
-          </button>
+          <Link to="/login">
+            <button className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors">
+              무료로 시작하기
+            </button>
+          </Link>
         </div>
       </div>
     </nav>
