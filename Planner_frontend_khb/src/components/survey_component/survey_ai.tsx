@@ -75,14 +75,13 @@ export default function SurveyForm() {
 
   const backEndPointTest = async () => {
     try {
-      const response = await fetch("localhost:5000/api/test", {
-        method: "GET",
+      const response = await fetch("http://localhost:5000/api/test", {
+        method: "POST",  // GET에서 POST로 변경
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           answer: "test",
-          // setAnswer 로 변경
         }),
       });
 
@@ -138,7 +137,7 @@ export default function SurveyForm() {
       </div>
 
       <button
-        onAbort={backEndPointTest}
+        onClick={backEndPointTest}
         className="bg-blue-500 mt-5 text-white px-4 py-2 rounded disabled:bg-gray-400 w-full"
       >
         확정
