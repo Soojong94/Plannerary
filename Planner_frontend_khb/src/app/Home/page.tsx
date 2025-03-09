@@ -1,10 +1,10 @@
 import React from "react";
-import Header from "@/components/header_component/header";
+import Sidebar from "@/components/sidebar_component/sidebar";
 
 const Home = () => {
   return (
-    <div>
-      <Header />
+    <div className="flex h-screen">
+      <Sidebar />
     </div>
   );
 };

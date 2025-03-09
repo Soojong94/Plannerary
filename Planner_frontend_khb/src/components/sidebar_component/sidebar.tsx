@@ -1,17 +1,17 @@
 import React from "react";
 import Link from "next/link";
 
-const Header: React.FC = () => {
+const Sidebar: React.FC = () => {
   return (
-    <header className="bg-blue-500 text-white p-4 flex justify-between items-center">
-      {/* 왼쪽 로고 */}
-      <div className="flex items-center space-x-2">
+    <div className="bg-blue-500 text-white p-4 h-full flex flex-col ">
+      {/* 로고 */}
+      <div className="flex items-center space-x-2 mb-4">
         <span className="text-xl font-bold">My App</span>
       </div>
 
       {/* 네비게이션 메뉴 */}
       <nav>
-        <ul className="flex space-x-6">
+        <ul className="flex flex-col space-y-4">
           <li>
             <Link href="/bucketlist" className="hover:underline">
               버킷리스트
@@ -31,13 +31,16 @@ const Header: React.FC = () => {
       </nav>
 
       {/* 로그아웃 버튼 */}
-      <div>
-        <Link href="/login" className="hover:underline">
+      <div className="mt-auto">
+        <Link
+          href="/login"
+          className="border border-white p-2 rounded-2xl hover:bg-white hover:text-blue-500"
+        >
           로그아웃
         </Link>
       </div>
-    </header>
+    </div>
   );
 };
 
-export default Header;
+export default Sidebar;
