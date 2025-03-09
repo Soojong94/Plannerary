@@ -17,7 +17,7 @@ export default function SurveyForm() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://172.30.1.53:8000/ai/survey", {
+      const response = await fetch("localhost:8000/ai/survey", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export default function SurveyForm() {
 
   const backSubmit = async () => {
     try {
-      const response = await fetch("http://172.30.1.90:8080/back/survey", {
+      const response = await fetch("localhost:8080/back/survey", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -73,6 +73,31 @@ export default function SurveyForm() {
     }
   };
 
+  const backEndPointTest = async () => {
+    try {
+      const response = await fetch("localhost:5000/api/test", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          answer: "test",
+          // setAnswer 로 변경
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("서버 응답 실패");
+      }
+
+      const data = await response.json();
+      console.log("응답 데이터:", data);
+
+      setInputValue(""); // 제출 후 입력 값 초기화
+    } catch (error) {
+      console.error("제출 실패:", error);
+    }
+  };
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">설문 조사</h2>
@@ -111,6 +136,13 @@ export default function SurveyForm() {
           <p>{answer}</p>
         </div>
       </div>
+
+      <button
+        onAbort={backEndPointTest}
+        className="bg-blue-500 mt-5 text-white px-4 py-2 rounded disabled:bg-gray-400 w-full"
+      >
+        확정
+      </button>
     </div>
   );
 }
