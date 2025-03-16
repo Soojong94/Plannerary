@@ -76,7 +76,7 @@ export default function SurveyForm() {
   const backEndPointTest = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/test", {
-        method: "POST", // GET에서 POST로 변경
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
