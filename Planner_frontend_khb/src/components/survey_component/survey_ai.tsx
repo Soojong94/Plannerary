@@ -81,9 +81,7 @@ export default function SurveyForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user_info: "admin",
-          bucketlist_info: "bucketlist_info",
-          bucketlist_detail: "bucketlist_detail",
+          chatResponse: chatResponse || "임시 데이터",
         }),
       });
 
