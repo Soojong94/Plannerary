@@ -1,18 +1,17 @@
+"use client";
+
 import React from "react";
 import TabBar from "@/components/util_component/tab_bar";
-import Bucketlist from "@/components/bucketlist_component/bucket_home";
 
-const Home = () => {
+export default function CalendarPage() {
   return (
     <div className="h-screen flex flex-col w-[764px] m-auto">
       <div className="flex-1">
-        <Bucketlist />
+        <div>커뮤니티</div>
       </div>
       <div>
         <TabBar />
       </div>
     </div>
   );
-};
-
-export default Home;
+}
