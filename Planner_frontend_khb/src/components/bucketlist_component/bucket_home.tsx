@@ -1,6 +1,6 @@
 import React from "react";
 
-const Bucketlist: React.FC = () => {
+const BucketHome = () => {
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-4">
@@ -15,4 +15,4 @@ const Bucketlist: React.FC = () => {
   );
 };
 
-export default Bucketlist;
+export default BucketHome;

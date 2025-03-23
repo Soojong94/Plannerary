@@ -1,4 +1,5 @@
 import React from "react";
+
 import TabBar from "@/components/util_component/tab_bar";
 import Bucketlist from "@/components/bucketlist_component/bucket_home";
 
