@@ -3,7 +3,6 @@
 npm 의존성 설치하기
 
 ```bash
-
 cd Planner_frontend_khb
 npm install
 ```
