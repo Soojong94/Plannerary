@@ -34,9 +34,13 @@ export default function SurveyForm() {
       const data = await response.json();
       console.log("응답 데이터:", data);
       setAnswer(data.received_data?.answer || "");
-      setChatResponse(typeof data.chat_response === 'string'
-        ? data.chat_response
-        : data.chat_response?.assistant_message || JSON.stringify(data.chat_response) || "");
+      setChatResponse(
+        typeof data.chat_response === "string"
+          ? data.chat_response
+          : data.chat_response?.assistant_message ||
+              JSON.stringify(data.chat_response) ||
+              ""
+      );
       alert("설문이 성공적으로 제출되었습니다!");
       setInputValue(""); // 제출 후 입력 값 초기화
     } catch (error) {
@@ -130,11 +134,15 @@ export default function SurveyForm() {
       <div className="flex gap-4 mt-4">
         <div className="flex-1 text-left border border-indigo-400 p-2">
           <h3 className="font-bold">Chat Response</h3>
-          <p>{typeof chatResponse === 'object' ? JSON.stringify(chatResponse) : chatResponse}</p>
+          <p>
+            {typeof chatResponse === "object"
+              ? JSON.stringify(chatResponse)
+              : chatResponse}
+          </p>
         </div>
         <div className="flex-1 text-right border border-indigo-400 p-2">
           <h3 className="font-bold">Answer</h3>
-          <p>{typeof answer === 'object' ? JSON.stringify(answer) : answer}</p>
+          <p>{typeof answer === "object" ? JSON.stringify(answer) : answer}</p>
         </div>
       </div>
 

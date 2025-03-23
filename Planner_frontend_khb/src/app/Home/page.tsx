@@ -1,10 +1,12 @@
 import React from "react";
-import Sidebar from "@/components/sidebar_component/sidebar";
+import TabBar from "@/components/util_component/tab_bar";
 
 const Home = () => {
   return (
-    <div className="flex h-screen">
-      <Sidebar />
+    <div className="h-screen">
+      <div className="w-[764px] m-auto">
+        <TabBar />
+      </div>
     </div>
   );
 };
