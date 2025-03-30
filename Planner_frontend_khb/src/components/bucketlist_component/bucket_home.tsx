@@ -18,7 +18,7 @@ const BucketHome: React.FC<BucketHomeProps> = ({ data }) => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/Diary`);
+    router.push(`/diary`);
   };
 
   return (
