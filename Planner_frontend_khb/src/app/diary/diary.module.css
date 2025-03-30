@@ -1,0 +1,132 @@
+/* src/app/diary/diary.module.css */
+
+/* 다이어리 컨테이너 - 전체 페이지를 감싸는 최상위 요소 */
+.diaryContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+/* 다이어리 카드 - 실제 다이어리 내용을 포함하는 카드 */
+.diary {
+  width: 100%;
+  max-width: 768px;
+  min-height: 800px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 제목 섹션 스타일 */
+.titleSection {
+  background-color: #e0f0f0;
+  padding: 16px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* 내용 섹션 스타일 */
+.contentSection {
+  background-color: #f0e0e0;
+  padding: 16px;
+  flex-grow: 1;
+  max-height: 250px;
+  overflow-y: auto;
+  /* 내용이 길어질 경우 스크롤 */
+}
+
+/* 계획 섹션 스타일 */
+.plansSection {
+  background-color: #e0e0f0;
+  padding: 16px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* 각 섹션의 제목 스타일 */
+.sectionTitle {
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* 계획 목록의 제목 스타일 */
+.planTitle {
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* 제목 입력 필드 스타일 */
+.titleInput {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 8px;
+  color: #000;
+}
+
+/* 내용 입력 텍스트 영역 스타일 */
+.contentTextarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  /* 세로 크기 조절 가능 */
+  margin-top: 8px;
+  color: #000;
+}
+
+/* 계획 헤더 영역 스타일 - 제목과 추가 버튼을 포함 */
+.plansHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* 계획 추가 버튼 스타일 */
+.addPlanButton {
+  background-color: #4a8cff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* 계획 목록 컨테이너 스타일 */
+.plansList {
+  max-height: 200px;
+  overflow-y: auto;
+  /* 계획이 많을 경우 스크롤 */
+}
+
+/* 개별 계획 항목 스타일 */
+.planItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  color: #000;
+}
+
+/* 완료된 계획 항목 스타일 */
+.completed {
+  text-decoration: line-through;
+  color: #555;
+  /* 완료된 항목은 시각적으로 구분 */
+}
