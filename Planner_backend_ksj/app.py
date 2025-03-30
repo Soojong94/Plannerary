@@ -1,30 +1,31 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-
-from flask_sqlalchemy import SQLAlchemy # DB 설정 관련
-from sqlalchemy import text  # 👉 SQL 직접 쓸 때 사용
-
 import config  # PostgreSQL 설정
-from models import db, Users  # 🔹 models.py에서 모델 불러오기 (ORM 방식 사용)
+
+from app import db
+from app.models.Membership import Membership  # 모델은 따로 직접 가져오기
+# from app.api.diary import diary_bp
+# from app.models.Diary import Diary
 
 
 app = Flask(__name__)
 CORS(app)  # CORS 설정
+app.config.from_object(config) # PostgreSQL 연결 설정
+db.init_app(app)  # 🔹 models.py에서 만든 db 인스턴스를 Flask에 연결 (먼저)
 
-# PostgreSQL 연결 설정
-app.config.from_object(config)
-db.init_app(app)  # 🔹 models.py에서 만든 db 인스턴스를 Flask에 연결
-
+# 이제 app context가 초기화된 후에 라우터 import
+from app.api.diary import diary_bp # 다이어리 라우터 등록
+app.register_blueprint(diary_bp)  #250330 자영 추가
 
 @app.route("/")
 def index():
     return jsonify({"message": "서버가 실행 중입니다."})
 
 
-# 모든 요청을 받아서 출력하는 API
+# 확정버튼 눌렀을때 -> 모든 요청을 받아서 출력하는 API
 @app.route("/api/test", methods=["POST"])
 def test():
-    data = request.json
+    data = request.json # 자영:3000/servey에서 확정 버튼 눌렀을때 들어오는 raw 데이터
     print("프론트엔드에서 받은 데이터:", data)
 
     # 단순히 받은 데이터를 그대로 반환
@@ -44,23 +45,6 @@ def survey():
     print("설문 데이터:", data)
 
     return jsonify({"received_data": data, "chat_response": "데이터 수신 완료"})
-
-
-# db 연결 테스트용(250323 자영)
-# ✔ ORM 방식으로 회원 목록 전체 조회
-@app.route("/users", methods=["GET"])
-def get_users():
-    users = Users.query.all()  # ORM 사용
-    user_list = [
-        {
-            "user_id": user.user_id,
-            "user_name": user.user_name,
-            "email": user.email,
-            "phone": user.phone
-        }
-        for user in users
-    ]
-    return jsonify(user_list)
 
 
 
