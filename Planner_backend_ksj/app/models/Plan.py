@@ -4,7 +4,7 @@ from app import db
 
 # 3. Plan 테이블
 class Plan(db.Model):
-    __tablename__ = 'tb_plan'
+    __tablename__ = 'plan'
 
     plan_id = db.Column(db.Integer, primary_key=True)
     bucket_id = db.Column(db.Integer, db.ForeignKey('bucketlist.bucket_id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False)

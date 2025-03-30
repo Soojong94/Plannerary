@@ -29,3 +29,19 @@ class Diary(db.Model):
 
     def __repr__(self):
         return f"<Diary {self.diary_id}>"
+    
+    
+    def to_dict(self):
+        return {
+            "bucket_id": self.bucket_id,
+            "user_id": self.user_id,
+            "bucket_title": self.bucket_title,
+            "bucket_category": self.bucket_category,
+            "duration_days": self.duration_days,
+            "bucket_start_dt": self.bucket_start_dt,
+            "bucket_end_dt": self.bucket_end_dt,
+            "budget_total": self.budget_total,
+            "budget_available": self.budget_available,
+            "success_criteria": self.success_criteria,
+            "achievement_rate": float(self.achievement_rate or 0),
+        }
