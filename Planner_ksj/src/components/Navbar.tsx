@@ -1,9 +1,20 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/use-auth";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +30,16 @@ const Navbar = () => {
     element?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
+  // 사용자 이름의 첫 글자를 가져오는 함수
+  const getInitials = (name: string) => {
+    return name?.charAt(0).toUpperCase() || "U";
+  };
+
   return (
     <nav
       className={cn(
@@ -31,6 +52,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="text-2xl font-bold text-gray-900">Plannerary</div>
+
           <div className="hidden md:flex items-center space-x-8">
             <button
               onClick={() => scrollTo("home")}
@@ -57,11 +79,49 @@ const Navbar = () => {
               요금제
             </button>
           </div>
-          <Link to="/login">
-            <button className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors">
-              무료로 시작하기
-            </button>
-          </Link>
+
+          {isAuthenticated ? (
+            <div className="flex items-center gap-4">
+              <span className="text-gray-700">
+                환영합니다, {user?.name} 님
+              </span>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Avatar className="h-8 w-8 cursor-pointer">
+                    <AvatarFallback className="bg-primary text-white">
+                      {getInitials(user?.name || "")}
+                    </AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>
+                    <Link to="/dashboard" className="w-full">
+                      대시보드
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link to="/profile" className="w-full">
+                      프로필
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleLogout}>
+                    로그아웃
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          ) : (
+            <div className="flex gap-4">
+              <Link to="/login">
+                <Button variant="outline">로그인</Button>
+              </Link>
+              <Link to="/register">
+                <Button className="bg-primary text-white hover:bg-primary/90 transition-colors">
+                  무료로 시작하기
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>
