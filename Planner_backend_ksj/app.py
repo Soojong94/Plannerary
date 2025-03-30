@@ -9,10 +9,11 @@ from models import db, Users  # 🔹 models.py에서 모델 불러오기 (ORM �
 
 
 app = Flask(__name__)
-CORS(app)  # CORS 설정
+CORS(app)  # CORS 설정정
 
 # PostgreSQL 연결 설정
 app.config.from_object(config)
+
 db.init_app(app)  # 🔹 models.py에서 만든 db 인스턴스를 Flask에 연결
 
 
