@@ -10,11 +10,12 @@ from app.models.Membership import Membership  # 모델은 따로 직접 가져�
 
 app = Flask(__name__)
 CORS(app)  # CORS 설정
+app.config.from_object(config) # PostgreSQL 연결 설정
+db.init_app(app)  # 🔹 models.py에서 만든 db 인스턴스를 Flask에 연결 (먼저)
 
-# PostgreSQL 연결 설정
-app.config.from_object(config)
-db.init_app(app)  # 🔹 models.py에서 만든 db 인스턴스를 Flask에 연결
-
+# 이제 app context가 초기화된 후에 라우터 import
+from app.api.diary import diary_bp # 다이어리 라우터 등록
+app.register_blueprint(diary_bp)  #250330 자영 추가
 
 @app.route("/")
 def index():
