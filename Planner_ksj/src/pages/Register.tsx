@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,13 +7,76 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/use-auth";
 
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { register } = useAuth();
+  const { register, googleLogin } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Google 클라이언트 라이브러리 로드
+    const script = document.createElement("script");
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      initGoogleButton();
+    };
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const initGoogleButton = () => {
+    if (window.google && document.getElementById("googleSignInDiv")) {
+      window.google.accounts.id.initialize({
+        client_id: "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com", // Google Cloud Console에서 발급받은 클라이언트 ID
+        callback: handleGoogleResponse,
+      });
+
+      window.google.accounts.id.renderButton(
+        document.getElementById("googleSignInDiv"),
+        {
+          type: "standard",
+          theme: "outline",
+          size: "large",
+          text: "signup_with",
+          shape: "rectangular",
+          logo_alignment: "left",
+          width: 320,
+        }
+      );
+    }
+  };
+
+  const handleGoogleResponse = async (response: any) => {
+    const { credential } = response;
+
+    // JWT 디코딩
+    const decodedToken = JSON.parse(atob(credential.split(".")[1]));
+
+    try {
+      await googleLogin(
+        decodedToken.email,
+        decodedToken.name,
+        decodedToken.sub // Google에서 제공하는 고유 ID
+      );
+      navigate("/");
+    } catch (error) {
+      console.error("구글 로그인 오류:", error);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,14 +151,7 @@ const Register = () => {
             </span>
           </div>
 
-          <Button
-            variant="outline"
-            className="w-full flex items-center justify-center gap-2 h-12"
-            onClick={() => {/* Google OAuth 구현 예정 */ }}
-          >
-            <img src="/google-icon.svg" alt="Google" className="w-5 h-5" />
-            Google로 계속하기
-          </Button>
+          <div id="googleSignInDiv" className="w-full flex justify-center my-4"></div>
 
           <p className="mt-6 text-center text-sm text-gray-600">
             이미 계정이 있으신가요?{" "}

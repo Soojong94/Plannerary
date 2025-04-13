@@ -8,6 +8,7 @@ interface AuthContextType {
   token: string | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
+  googleLogin: (email: string, name: string, googleId: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
@@ -68,6 +69,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const googleLogin = async (email: string, name: string, googleId: string) => {
+    setIsLoading(true);
+    try {
+      const response = await api.googleAuth({ email, name, googleId });
+      setUser(response.user);
+      setToken(response.token);
+      localStorage.setItem('token', response.token);
+      toast({
+        title: '구글 로그인 성공',
+        description: '환영합니다!',
+      });
+    } catch (error) {
+      console.error('구글 로그인 실패:', error);
+      toast({
+        title: '구글 로그인 실패',
+        description: error instanceof Error ? error.message : '구글 로그인에 실패했습니다.',
+        variant: 'destructive',
+      });
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const register = async (name: string, email: string, password: string) => {
     setIsLoading(true);
     try {
@@ -105,6 +130,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         token,
         isLoading,
         login,
+        googleLogin,
         register,
         logout,
         isAuthenticated: !!user,
