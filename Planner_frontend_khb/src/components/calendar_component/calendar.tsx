@@ -4,11 +4,14 @@ import dayjs from "dayjs";
 
 const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
 
-const Calendar: React.FC = () => {
-  const today = dayjs();
+interface CalendarProps {
+  selectedDate: dayjs.Dayjs;
+  onDateChange: (date: dayjs.Dayjs) => void;
+}
 
+const Calendar: React.FC<CalendarProps> = ({ selectedDate, onDateChange }) => {
+  const today = dayjs();
   const [currentDate, setCurrentDate] = useState(today);
-  const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs>(today); // ✅ 오늘 날짜 선택 상태
   const [showPicker, setShowPicker] = useState(false);
   const [selectedYear, setSelectedYear] = useState(today.year());
   const [selectedMonth, setSelectedMonth] = useState(today.month() + 1);
@@ -129,10 +132,7 @@ const Calendar: React.FC = () => {
               className={`py-4 cursor-pointer rounded-full hover:bg-blue-100 ${
                 isSelected ? "bg-blue-500 text-white font-bold" : ""
               }`}
-              onClick={() => {
-                setSelectedDate(thisDate);
-                console.log("선택한 날짜:", thisDate.format("YYYY-MM-DD"));
-              }}
+              onClick={() => onDateChange(thisDate)}
             >
               {date}
             </div>
