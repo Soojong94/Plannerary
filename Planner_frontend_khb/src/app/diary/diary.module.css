@@ -4,89 +4,167 @@
 .diaryContainer {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100vh;
-  padding: 20px;
-  background-color: #f0f0f0;
+  background-color: #212121;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 /* 다이어리 카드 - 실제 다이어리 내용을 포함하는 카드 */
 .diary {
   width: 100%;
-  max-width: 768px;
-  min-height: 800px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 480px;
+  min-height: 100vh;
+  background-color: #212121;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-/* 제목 섹션 스타일 */
-.titleSection {
-  background-color: #e0f0f0;
+/* 헤더 스타일 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 16px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  background-color: #212121;
+  border-bottom: 1px solid #333;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-/* 내용 섹션 스타일 */
-.contentSection {
-  background-color: #f0e0e0;
-  padding: 16px;
-  flex-grow: 1;
-  max-height: 250px;
-  overflow-y: auto;
-  /* 내용이 길어질 경우 스크롤 */
-}
-
-/* 계획 섹션 스타일 */
-.plansSection {
-  background-color: #e0e0f0;
-  padding: 16px;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
-
-/* 각 섹션의 제목 스타일 */
-.sectionTitle {
-  font-size: 16px;
-  color: #000;
-  margin-bottom: 10px;
+.headerTitle {
+  font-size: 20px;
   font-weight: 600;
+  color: white;
+  margin: 0;
 }
 
-/* 계획 목록의 제목 스타일 */
-.planTitle {
+.backButton,
+.menuButton {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 메뉴 관련 스타일 */
+.menuContainer {
+  position: relative;
+}
+
+.menuDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 150px;
+  z-index: 100;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  color: white;
+  cursor: pointer;
   font-size: 14px;
-  color: #000;
+}
+
+.menuItem:hover {
+  background-color: #444;
+}
+
+.menuItem:last-child {
+  color: #FF4747;
+}
+
+/* 날짜 섹션 */
+.dateSection {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 16px;
+}
+
+.date {
+  font-size: 18px;
+  color: #cccccc;
   margin: 0;
-  font-weight: 500;
+}
+
+/* 제목 섹션에 약간 밝은 회색 배경 */
+.titleSection {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  margin: 8px 16px;
+  padding: 16px;
+}
+
+/* 내용 섹션은 기본 배경색보다 약간 어두운 회색 */
+.contentSection {
+  background-color: #252525;
+  border-radius: 8px;
+  margin: 8px 16px;
+  padding: 16px;
+}
+
+/* 계획 섹션도 약간 다른 회색 톤 */
+.plansSection {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  margin: 8px 16px;
+  padding: 16px;
+  border-top: none;
+  /* 기존 border-top 제거하고 배경색으로 구분 */
 }
 
 /* 제목 입력 필드 스타일 */
 .titleInput {
   width: 100%;
-  padding: 10px;
+  padding: 12px 0;
   font-size: 18px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-top: 8px;
-  color: #000;
+  border: none;
+  border-bottom: 1px solid #444;
+  background-color: transparent;
+  color: white;
+  outline: none;
+}
+
+.titleInput::placeholder {
+  color: #777;
 }
 
 /* 내용 입력 텍스트 영역 스타일 */
 .contentTextarea {
   width: 100%;
-  min-height: 150px;
-  padding: 10px;
+  min-height: 200px;
+  padding: 12px 0;
   font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  resize: vertical;
-  /* 세로 크기 조절 가능 */
-  margin-top: 8px;
-  color: #000;
+  border: none;
+  background-color: transparent;
+  resize: none;
+  color: white;
+  outline: none;
+  line-height: 1.6;
+}
+
+.contentTextarea::placeholder {
+  color: #777;
 }
 
 /* 계획 헤더 영역 스타일 - 제목과 추가 버튼을 포함 */
@@ -94,39 +172,111 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
+}
+
+/* 계획 제목 스타일 */
+.planTitle {
+  font-size: 16px;
+  color: #ccc;
+  margin: 0;
+  font-weight: 500;
 }
 
 /* 계획 추가 버튼 스타일 */
 .addPlanButton {
-  background-color: #4a8cff;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
+  background-color: transparent;
+  color: #999;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  border-radius: 16px;
   cursor: pointer;
+  font-size: 14px;
+}
+
+.addPlanButton:hover {
+  background-color: #333;
 }
 
 /* 계획 목록 컨테이너 스타일 */
 .plansList {
-  max-height: 200px;
-  overflow-y: auto;
-  /* 계획이 많을 경우 스크롤 */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 /* 개별 계획 항목 스타일 */
 .planItem {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  color: #000;
+  gap: 12px;
+}
+
+.planCheckbox {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #555;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.planCheckbox:checked {
+  background-color: #555;
+}
+
+.planCheckbox:checked::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 7px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.planText {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  padding: 4px 0;
+  border-bottom: 1px solid #333;
 }
 
 /* 완료된 계획 항목 스타일 */
 .completed {
   text-decoration: line-through;
-  color: #555;
-  /* 완료된 항목은 시각적으로 구분 */
+  color: #777;
+}
+
+/* 다이어리 전체 보기 버튼 컨테이너 */
+.viewAllContainer {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  margin-top: auto;
+}
+
+.viewAllButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #2a2a2a;
+  color: #ccc;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 22px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.viewAllButton:hover {
+  background-color: #333;
 }

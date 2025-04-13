@@ -32,7 +32,8 @@ app.post('/api/register', async (req, res) => {
       id: users.length + 1,
       name,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      provider: 'local'
     };
 
     users.push(newUser);
@@ -84,6 +85,52 @@ app.post('/api/login', async (req, res) => {
 
     res.json({
       message: '로그인 성공',
+      token,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+  }
+});
+
+// 구글 OAuth 로그인/회원가입 엔드포인트
+app.post('/api/auth/google', async (req, res) => {
+  try {
+    const { email, name, googleId } = req.body;
+
+    // 이미 존재하는 사용자인지 확인
+    let user = users.find(user => user.email === email);
+
+    // 존재하지 않으면 새로 생성
+    if (!user) {
+      user = {
+        id: users.length + 1,
+        name,
+        email,
+        googleId,
+        provider: 'google'
+      };
+      users.push(user);
+    }
+    // 기존 사용자라면 googleId 업데이트
+    else if (!user.googleId) {
+      user.googleId = googleId;
+      user.provider = 'google';
+    }
+
+    // JWT 생성
+    const token = jwt.sign(
+      { id: user.id, email: user.email, name: user.name },
+      JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+
+    res.json({
+      message: '구글 로그인 성공',
       token,
       user: {
         id: user.id,

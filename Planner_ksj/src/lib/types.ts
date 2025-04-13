@@ -18,3 +18,9 @@ export interface LoginRequest {
 export interface RegisterRequest extends LoginRequest {
   name: string;
 }
+
+export interface GoogleAuthRequest {
+  email: string;
+  name: string;
+  googleId: string;
+}

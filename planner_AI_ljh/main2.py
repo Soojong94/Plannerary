@@ -35,7 +35,7 @@ def main():
                     {"role": "user", "content": user_message}
                 ],
                 max_tokens=200,
-                temperature=0.7
+                temperature=0.7cd
             )
 
             # 응답 파싱
